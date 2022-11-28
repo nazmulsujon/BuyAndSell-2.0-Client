@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layouts/Main";
 import About from "../../Pages/About/About";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import FurnitureCategory from "../../Pages/FurnitureCategory/FurnitureCategory";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/category/:id",
+        element: <FurnitureCategory></FurnitureCategory>,
       },
       {
         path: "/signup",

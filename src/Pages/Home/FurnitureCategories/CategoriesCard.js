@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CategoriesCard = ({ category }) => {
   console.log(category);
-  const { name, image } = category;
+  const { id, name, image } = category;
   return (
     <div className="card w-96 bg-neutral mx-auto rounded">
       <figure className="px-10 pt-10">
@@ -10,7 +11,7 @@ const CategoriesCard = ({ category }) => {
       </figure>
       <div className="card-body items-center text-center">
         <div className="card-actions w-72">
-          <button className="btn btn-info w-full rounded">{name}</button>
+          <Link className="btn btn-info w-full rounded">{name}</Link>
         </div>
       </div>
     </div>
