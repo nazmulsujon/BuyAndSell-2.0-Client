@@ -75,7 +75,7 @@ const Header = () => {
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          <button onClick={handleLogOut} className="btn btn-outline rounded-lg">
+          <button onClick={handleLogOut} className="btn btn-secondary btn-outline rounded-lg">
             Logout
           </button>
         </div>

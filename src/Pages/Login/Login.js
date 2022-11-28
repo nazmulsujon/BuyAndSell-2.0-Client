@@ -84,7 +84,7 @@ const Login = () => {
           </div>
 
           <div className="form-control max-w-xs mx-auto">
-            <input className="btn btn-accent rounded" type="submit" value="login" />
+            <input className="btn  btn-secondary rounded" type="submit" value="login" />
           </div>
           <div className="max-w-xs mx-auto">{loginError && <p className="text-red-600 font-mono">{loginError}</p>}</div>
         </form>
@@ -93,7 +93,7 @@ const Login = () => {
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
         <div className="max-w-xs my-2 mx-auto">
-          <button className="btn btn-accent btn-outline rounded w-full">
+          <button className="btn btn-secondary btn-outline rounded w-full">
             CONTINUE WITH GOOGLE <FaGoogle className="ml-3 font-bold" />
           </button>
         </div>

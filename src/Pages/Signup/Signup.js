@@ -125,7 +125,7 @@ const SignUp = () => {
           </div>
 
           <div className="form-control w-full max-w-xs mx-auto">
-            <input className="btn btn-accent rounded" type="submit" value="Sign Up" />
+            <input className="btn btn-secondary rounded" type="submit" value="Sign Up" />
           </div>
           <div className="max-w-xs mx-auto">
             {signUpError && <p className="text-red-600 font-mono">{signUpError}</p>}
@@ -139,7 +139,7 @@ const SignUp = () => {
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
         <div className="max-w-xs my-2 mx-auto">
-          <button className="btn btn-accent btn-outline w-full rounded" onClick={handleGoogleSignIn}>
+          <button className="btn btn-secondary btn-outline w-full rounded" onClick={handleGoogleSignIn}>
             CONTINUE WITH GOOGLE <FaGoogle className="ml-3 font-bold" />
           </button>
         </div>
