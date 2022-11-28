@@ -43,8 +43,6 @@ const SignUp = () => {
       });
   };
 
-  // const getUserToken = (email) => {}; //use token hook diye kaj kora hoiche
-
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((res) => {
@@ -70,7 +68,7 @@ const SignUp = () => {
             <input
               type="text"
               {...register("name", { required: "Name is required" })}
-              className="input input-bordered"
+              className="input input-bordered rounded"
               aria-invalid={errors.name ? "true" : "false"}
             />
             {errors.name && (
@@ -87,7 +85,7 @@ const SignUp = () => {
             <input
               type="email"
               {...register("email", { required: "Email Address is required" })}
-              className="input input-bordered"
+              className="input input-bordered rounded"
               aria-invalid={errors.email ? "true" : "false"}
             />
             {errors.email && (
@@ -114,7 +112,7 @@ const SignUp = () => {
                   message: "Password must have uppercase, number and special characters",
                 },
               })}
-              className="input input-bordered"
+              className="input input-bordered rounded"
             />
             {errors.password && (
               <label role="alert" className="text-red-600 font-mono">
@@ -127,18 +125,21 @@ const SignUp = () => {
           </div>
 
           <div className="form-control w-full max-w-xs mx-auto">
-            <input className="btn btn-accent" type="submit" value="Sign Up" />
+            <input className="btn btn-accent rounded" type="submit" value="Sign Up" />
           </div>
           <div className="max-w-xs mx-auto">
             {signUpError && <p className="text-red-600 font-mono">{signUpError}</p>}
           </div>
         </form>
         <p className="max-w-xs my-2 mx-auto">
-          Already have an account ?<Link className="text-secondary ml-2 ">Please Login</Link>{" "}
+          Already have an account ?
+          <Link to={"/login"} className="text-secondary ml-2">
+            Please Login
+          </Link>{" "}
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
         <div className="max-w-xs my-2 mx-auto">
-          <button className="btn btn-accent btn-outline w-full" onClick={handleGoogleSignIn}>
+          <button className="btn btn-accent btn-outline w-full rounded" onClick={handleGoogleSignIn}>
             CONTINUE WITH GOOGLE <FaGoogle className="ml-3 font-bold" />
           </button>
         </div>
