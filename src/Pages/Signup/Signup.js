@@ -58,7 +58,7 @@ const SignUp = () => {
   return (
     <section className="h-[600px] flex justify-center items-center">
       <div className="w-96 shadow-lg p-5 rounded">
-        <h2 className="text-2xl text-center font-bold">Sign Up</h2>
+        <h2 className="text-2xl text-center font-bold text-secondary">Sign Up</h2>
 
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full max-w-xs mx-auto">
@@ -132,9 +132,9 @@ const SignUp = () => {
           </div>
         </form>
         <p className="max-w-xs my-2 mx-auto">
-          Already have an account ?
-          <Link to={"/login"} className="text-secondary ml-2">
-            Please Login
+          Already have an account ? Please
+          <Link to={"/login"} className="text-info font-semibold ml-2">
+            Login
           </Link>{" "}
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
