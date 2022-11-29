@@ -1,8 +1,49 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
-const BookingModal = ({ furniture }) => {
+const BookingModal = ({ furniture, setFurniture }) => {
   const { user } = useContext(AuthContext);
+
+  const handleBooking = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const price = form.price.value;
+    const location = form.location.value;
+    const phone = form.phone.value;
+    const order = {
+      customer: user?.displayName,
+      email: user?.email,
+      price,
+      location,
+      phone,
+      image: furniture?.image,
+    };
+    console.log(order);
+
+    //send data to the server
+    //saved data then close the modal
+    //display success toast
+
+    fetch(`http://localhost:5000/bookingOrders`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          console.log(data);
+          toast.success("Booking confirmed");
+          // refetch();
+          setFurniture(null);
+          // if want set a spinner in this place
+        } else {
+        }
+      });
+  };
 
   return (
     <>
@@ -12,11 +53,11 @@ const BookingModal = ({ furniture }) => {
           <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">
             ✕
           </label>
-          <form>
+          <form onSubmit={handleBooking}>
             <h2 className="font-bold mt-3 text-xl">{furniture?.name}</h2>
             <input
               type="text"
-              name="name"
+              name="customer"
               className="input input-bordered w-full rounded my-2 bg-neutral"
               defaultValue={user?.displayName}
               readOnly
@@ -42,6 +83,7 @@ const BookingModal = ({ furniture }) => {
               placeholder="Meeting location"
               name="location"
               className="input input-bordered w-full rounded my-2"
+              required
             ></input>
             <input
               name="phone"

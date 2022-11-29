@@ -7,6 +7,8 @@ import FurnitureCategoryCard from "./FurnitureCategoryCard";
 
 const FurnitureCategory = () => {
   const { id } = useParams();
+  const [furniture, setFurniture] = useState(null);
+
   const { data: furnitureCategory = [] } = useQuery({
     queryKey: ["furnitureCategory"],
     queryFn: async () => {
@@ -20,8 +22,6 @@ const FurnitureCategory = () => {
     },
   });
 
-  const [furniture, setFurniture] = useState(null);
-
   if (furnitureCategory.length === 0) {
     return (
       <div className="text-center">
@@ -30,16 +30,18 @@ const FurnitureCategory = () => {
     );
   }
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 my-10">
-      {furnitureCategory.map((category) => (
-        <FurnitureCategoryCard
-          key={category._id}
-          category={category}
-          setFurniture={setFurniture}
-        ></FurnitureCategoryCard>
-      ))}
-      <BookingModal furniture={furniture}></BookingModal>
-    </div>
+    <section>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 my-10">
+        {furnitureCategory.map((category) => (
+          <FurnitureCategoryCard
+            key={category._id}
+            category={category}
+            setFurniture={setFurniture}
+          ></FurnitureCategoryCard>
+        ))}
+      </div>
+      {furniture && <BookingModal furniture={furniture} setFurniture={setFurniture}></BookingModal>}
+    </section>
   );
 };
 
