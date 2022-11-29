@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layouts/DashboardLayout";
 import Main from "../../Layouts/Main";
 import About from "../../Pages/About/About";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
@@ -39,5 +40,9 @@ export const router = createBrowserRouter([
         element: <Login></Login>,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
   },
 ]);

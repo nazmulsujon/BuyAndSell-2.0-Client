@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { FaCaretSquareLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
@@ -25,8 +26,8 @@ const Header = () => {
         </Link>
       </li>
       <li className="mr-1 my-1 font-semibold">
-        <Link to={`/appointment`} className="rounded">
-          Appointment
+        <Link to={`/dashboard`} className="rounded">
+          Dashboard
         </Link>
       </li>
       <li className="mr-1 my-1 font-semibold">
@@ -59,7 +60,7 @@ const Header = () => {
               </svg>
             </label>
             <ul
-              tabIndex={0}
+              tabIndex={1}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               {menuItems}
@@ -75,9 +76,16 @@ const Header = () => {
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
         </div>
         <div className="navbar-end">
-          <button onClick={handleLogOut} className="btn btn-secondary btn-outline rounded-lg">
-            Logout
-          </button>
+          {user?.uid ? (
+            <button onClick={handleLogOut} className="btn btn-secondary btn-outline rounded-lg">
+              Logout
+            </button>
+          ) : (
+            <></>
+          )}
+          <label htmlFor="dashboard-drawer" className="lg:hidden btn ">
+            <FaCaretSquareLeft className="text-4xl" />
+          </label>
         </div>
       </div>
     </section>

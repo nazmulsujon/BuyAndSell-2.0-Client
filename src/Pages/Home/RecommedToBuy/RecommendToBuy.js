@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import bedImg from "../../../assets/bed.svg";
 
 const RecommendToBuy = () => {
@@ -23,7 +24,9 @@ const RecommendToBuy = () => {
             We’re here to continue those stories and create a world where furniture is circular, sustainable, and here
             to stay.
           </p>
-          <button className="btn btn-secondary rounded">Buy Now</button>
+          <Link to={`/category/01`} className="btn btn-secondary rounded">
+            Buy Now
+          </Link>
         </div>
       </div>
     </div>

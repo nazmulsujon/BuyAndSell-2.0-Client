@@ -103,7 +103,7 @@ const Login = () => {
           <div className="max-w-xs mx-auto">{loginError && <p className="text-red-600 font-mono">{loginError}</p>}</div>
         </form>
         <p className="max-w-xs my-2 mx-auto">
-          New to Doctors Portal ? Create<Link className="ml-2 text-info font-semibold">new account</Link>{" "}
+          New to Buy&Sell ? Create<Link className="ml-2 text-info font-semibold">new account</Link>{" "}
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
         <div className="max-w-xs my-2 mx-auto">
