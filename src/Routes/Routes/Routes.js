@@ -6,6 +6,7 @@ import FurnitureCategory from "../../Pages/FurnitureCategory/FurnitureCategory";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -23,10 +24,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category/:id",
-        element: <FurnitureCategory></FurnitureCategory>,
-        loader: async ({ params }) => {
-          return fetch(`http://localhost:5000/category/${params.id}`);
-        },
+        element: (
+          <PrivateRoute>
+            <FurnitureCategory></FurnitureCategory>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signup",

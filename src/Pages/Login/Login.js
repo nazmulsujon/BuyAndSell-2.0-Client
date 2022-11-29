@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
 
   const {
@@ -17,6 +17,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const handleLogin = (data, e) => {
     // console.log(data);
@@ -26,12 +27,25 @@ const Login = () => {
         const user = res.user;
         console.log(user);
         toast.success("Login successfully.");
+        navigate(from, { replace: true });
         e.target.reset();
-        setLoginError("");
       })
       .catch((err) => {
         console.error(err);
         setLoginError(err.message);
+      });
+  };
+
+  // handle googole signIn
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
@@ -93,7 +107,7 @@ const Login = () => {
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
         <div className="max-w-xs my-2 mx-auto">
-          <button className="btn btn-secondary btn-outline rounded w-full">
+          <button onClick={handleGoogleSignIn} className="btn btn-secondary btn-outline rounded w-full">
             CONTINUE WITH GOOGLE <FaGoogle className="ml-3 font-bold" />
           </button>
         </div>

@@ -1,7 +1,9 @@
 import React from "react";
 import { FaRegCircle } from "react-icons/fa";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
-const FurnitureCategoryCard = ({ category }) => {
+const FurnitureCategoryCard = ({ category, setFurniture }) => {
   const {
     name,
     image,
@@ -18,11 +20,15 @@ const FurnitureCategoryCard = ({ category }) => {
   return (
     <div className="card w-96 bg-neutral shadow mx-auto">
       <figure>
-        <img
-          src={image}
-          alt="furniture"
-          className="w-96 h-80  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
-        />
+        <PhotoProvider>
+          <PhotoView src={image}>
+            <img
+              src={image}
+              alt="furniture"
+              className="w-96 h-80  transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+            />
+          </PhotoView>
+        </PhotoProvider>
       </figure>
       <div className="card-body">
         <div className="flex items-center">
@@ -56,7 +62,9 @@ const FurnitureCategoryCard = ({ category }) => {
         </p>
       </div>
       <div className="card-actions w-64 mx-auto mb-3">
-        <button className="btn btn-info w-full rounded">Book Now</button>
+        <label onClick={() => setFurniture(category)} htmlFor="booking-modal" className={`btn btn-info w-full rounded`}>
+          Book Now
+        </label>
       </div>
     </div>
   );
