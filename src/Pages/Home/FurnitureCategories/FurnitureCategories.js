@@ -1,17 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../Shared/Spinner/Spinner";
 import CategoriesCard from "./CategoriesCard";
+import axios from "axios";
 
 const FurnitureCategories = () => {
-  const { data: categories = [] } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/categories`);
-      const data = await res.json();
-      return data;
-    },
-  });
+  const [categories, setCategories] = useState([]);
+
+  // use axios get method
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/categories",
+    }).then((res) => {
+      setCategories(res.data);
+    });
+  }, []);
 
   if (categories.length === 0) {
     return (
