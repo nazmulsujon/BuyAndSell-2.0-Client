@@ -5,7 +5,7 @@ import Header from "../Pages/Shared/Header/Header";
 
 const Main = () => {
   return (
-    <div>
+    <div className="min-h-screen w-full">
       <Header></Header>
       <Outlet></Outlet>
       <Footer></Footer>

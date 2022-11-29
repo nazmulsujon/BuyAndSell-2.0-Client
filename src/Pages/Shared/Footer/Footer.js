@@ -5,7 +5,7 @@ import logo from "../../../assets/logo.png";
 
 const Footer = () => {
   return (
-    <div className="bg-neutral">
+    <div className="bg-neutral sticky top-[100vh]">
       <div className="py-3 md:flex justify-center items-center">
         <h6 className="p-1 text-2xl text-accent text-center font-bold ">Follow us on :</h6>
         <div className="flex justify-center my-5 text-secondary">

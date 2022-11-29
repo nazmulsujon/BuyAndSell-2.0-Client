@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Spinner from "../../Shared/Spinner/Spinner";
 import CategoriesCard from "./CategoriesCard";
 
 const FurnitureCategories = () => {
@@ -12,6 +13,13 @@ const FurnitureCategories = () => {
     },
   });
 
+  if (categories.length === 0) {
+    return (
+      <div className="text-center">
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <section className="my-10">
       <h2 className="text-2xl font-bold text-primary my-5 text-center uppercase">Shop by categories</h2>

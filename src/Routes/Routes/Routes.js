@@ -24,6 +24,9 @@ export const router = createBrowserRouter([
       {
         path: "/category/:id",
         element: <FurnitureCategory></FurnitureCategory>,
+        loader: async ({ params }) => {
+          return fetch(`http://localhost:5000/category/${params.id}`);
+        },
       },
       {
         path: "/signup",
