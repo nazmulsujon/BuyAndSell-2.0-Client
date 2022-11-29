@@ -65,6 +65,7 @@ const SignUp = () => {
 
   const saveUserToDb = (name, email, role) => {
     const user = { name, email, role };
+
     fetch(`http://localhost:5000/users`, {
       method: "POST",
       headers: {
@@ -76,7 +77,8 @@ const SignUp = () => {
       .then((data) => {
         console.log(data);
         setCreatedUserEmail(email);
-      });
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

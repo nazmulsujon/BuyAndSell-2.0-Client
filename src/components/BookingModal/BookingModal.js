@@ -3,8 +3,7 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const BookingModal = ({ furniture }) => {
   const { user } = useContext(AuthContext);
-  // const { name, resale_price } = furniture;
-  // console.log(name, resale_price);
+
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
