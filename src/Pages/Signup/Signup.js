@@ -32,6 +32,7 @@ const SignUp = () => {
         updateUserProfile(userInfo)
           .then(() => {
             console.log("update user successfully");
+            saveUserToDb(data.name, data.email, data.role);
           })
           .catch((err) => {
             console.error(err);
@@ -47,7 +48,8 @@ const SignUp = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
-        console.log(user);
+        // console.log(user);
+        saveUserToDb(user?.displayName, user?.email, "buyer");
         navigate("/");
       })
       .catch((err) => {
@@ -55,13 +57,36 @@ const SignUp = () => {
       });
   };
 
+  const saveUserToDb = (name, email, role) => {
+    const user = { name, email, role };
+    fetch(`http://localhost:5000/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
-    <section className="h-[600px] flex justify-center items-center">
+    <section className="h-[700px] flex justify-center items-center">
       <div className="w-96 shadow-lg p-5 rounded">
-        <h2 className="text-2xl text-center font-bold text-secondary">Sign Up</h2>
+        <h2 className="text-2xl text-center font-bold text-secondary mb-3">Sign Up</h2>
 
         <form onSubmit={handleSubmit(handleSignUp)}>
           <div className="form-control w-full max-w-xs mx-auto">
+            <label className="label">
+              <span className="label-text font-mono">Account type Buyer/Seller</span>
+            </label>
+            <select type="text" {...register("role")} className="select select-bordered rounded">
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+            </select>
+
             <label className="label">
               <span className="label-text font-mono">Name</span>
             </label>

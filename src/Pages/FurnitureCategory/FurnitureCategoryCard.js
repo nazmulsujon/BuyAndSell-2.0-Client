@@ -1,7 +1,6 @@
 import React from "react";
 import { FaRegCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import "react-photo-view/dist/react-photo-view.css";
 
 const FurnitureCategoryCard = ({ category, setFurniture }) => {
   const {
@@ -54,9 +53,9 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
           <br />
           Used time: {use_time}
           <br />
-          Original price: <span className="text-red-500 font-semibold">{original_price}</span>
+          Original price: <span className="text-error font-semibold">{original_price}</span>
           <br />
-          Resale price: <span className="text-red-500 font-semibold">{resale_price}</span>
+          Resale price: <span className="text-success font-semibold">{resale_price}</span>
           <br />
           Description: {description}
         </p>
