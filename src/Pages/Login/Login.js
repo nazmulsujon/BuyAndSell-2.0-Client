@@ -4,10 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState("");
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
 
   const {
     register,
@@ -17,7 +20,11 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const handleLogin = (data, e) => {
     // console.log(data);
@@ -26,6 +33,7 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+        setLoginUserEmail(data.email);
         toast.success("Login successfully.");
         navigate(from, { replace: true });
         e.target.reset();
@@ -103,7 +111,10 @@ const Login = () => {
           <div className="max-w-xs mx-auto">{loginError && <p className="text-red-600 font-mono">{loginError}</p>}</div>
         </form>
         <p className="max-w-xs my-2 mx-auto">
-          New to Buy&Sell ? Create<Link className="ml-2 text-info font-semibold">new account</Link>{" "}
+          New to Buy&Sell ? Create
+          <Link to={"/signup"} className="ml-2 text-info font-semibold">
+            new account
+          </Link>
         </p>
         <div className="divider max-w-xs mx-auto">OR</div>
         <div className="max-w-xs my-2 mx-auto">

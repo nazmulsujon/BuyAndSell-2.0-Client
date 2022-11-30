@@ -14,17 +14,13 @@ const BookingModal = ({ furniture, setFurniture }) => {
     const order = {
       customer: user?.displayName,
       email: user?.email,
+      product: furniture?.name,
+      image: furniture?.image,
       price,
       location,
       phone,
-      image: furniture?.image,
     };
     console.log(order);
-
-    //send data to the server
-    //saved data then close the modal
-    //display success toast
-
     fetch(`http://localhost:5000/bookingOrders`, {
       method: "POST",
       headers: {
@@ -37,9 +33,7 @@ const BookingModal = ({ furniture, setFurniture }) => {
         if (data.acknowledged) {
           console.log(data);
           toast.success("Booking confirmed");
-          // refetch();
           setFurniture(null);
-          // if want set a spinner in this place
         } else {
         }
       });

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FaCaretSquareLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
@@ -16,29 +16,33 @@ const Header = () => {
   const menuItems = (
     <React.Fragment>
       <li className="mr-1 my-1 font-semibold">
-        <Link to={`/`} className="rounded">
+        <NavLink to={`/`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
           Home
-        </Link>
+        </NavLink>
       </li>
       <li className="mr-1 my-1 font-semibold">
-        <Link to={`/about`} className="rounded">
+        <NavLink to={`/about`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
           About
-        </Link>
+        </NavLink>
       </li>
+      {user ? (
+        <li className="mr-1 my-1 font-semibold">
+          <NavLink to={`/dashboard`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        <></>
+      )}
       <li className="mr-1 my-1 font-semibold">
-        <Link to={`/dashboard`} className="rounded">
-          Dashboard
-        </Link>
-      </li>
-      <li className="mr-1 my-1 font-semibold">
-        <Link to={`/login`} className="rounded">
+        <NavLink to={`/login`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
           Login
-        </Link>
+        </NavLink>
       </li>
       <li className="mr-1 my-1 font-semibold">
-        <Link to={`/signup`} className="rounded">
+        <NavLink to={`/signup`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
           Sign up
-        </Link>
+        </NavLink>
       </li>
     </React.Fragment>
   );
@@ -48,7 +52,7 @@ const Header = () => {
       <div className="navbar md:px-10">
         <div className="navbar-start w-11/12">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden rounded-lg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -83,8 +87,8 @@ const Header = () => {
           ) : (
             <></>
           )}
-          <label htmlFor="dashboard-drawer" className="lg:hidden btn ">
-            <FaCaretSquareLeft className="text-4xl" />
+          <label htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden rounded-lg">
+            <FaCaretSquareLeft className="text-3xl" />
           </label>
         </div>
       </div>
