@@ -1,6 +1,8 @@
 import React from "react";
+import tickmark from "../../assets/tickmark.png";
 import { FaRegCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import useVerified from "../../hooks/useVerified";
 
 const FurnitureCategoryCard = ({ category, setFurniture }) => {
   const {
@@ -15,7 +17,9 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
     published_date,
     seller,
   } = category;
-  const { seller_name, seller_img, location, mobile } = seller;
+
+  const { seller_name, seller_img, location, mobile, email } = seller;
+  const [isVerified] = useVerified(email);
   return (
     <div className="card w-96 bg-neutral shadow mx-auto">
       <figure>
@@ -35,9 +39,14 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
             <img src={seller_img} alt="seller" className="rounded-full" />
           </div>
           <div>
-            <p className="badge rounded mr-1">{location}</p> <br />
+            <div className="flex justify-start">
+              <div className="flex items-center">
+                <p className="badge rounded font-semibold ">{seller_name}</p> <br />
+                {isVerified && <img src={tickmark} alt="tickmark" className="w-5" />}
+              </div>
+            </div>
             <p className="badge  rounded">
-              {seller_name} <FaRegCircle className="bg-secondary rounded-full mr-1 ml-1" />
+              {location} <FaRegCircle className="bg-secondary rounded-full mr-1 ml-1" />
               {mobile}
             </p>
           </div>

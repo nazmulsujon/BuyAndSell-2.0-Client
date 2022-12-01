@@ -1,7 +1,9 @@
 import React from "react";
+import useVerified from "../../../hooks/useVerified";
 
-const AllSellersList = ({ seller, i, handleDelete }) => {
+const AllSellersList = ({ seller, i, handleDelete, handleVarify }) => {
   const { name, email, _id } = seller;
+  const [isVerified] = useVerified(email);
   return (
     <>
       <tr>
@@ -17,7 +19,13 @@ const AllSellersList = ({ seller, i, handleDelete }) => {
           </button>
         </td>
         <td className=" font-semibold">
-          <button className="btn font-bold rounded-lg">Verify</button>
+          {isVerified ? (
+            <button className="btn bg-green-500 hover:bg-green-600 font-bold rounded-lg">Verifid</button>
+          ) : (
+            <button onClick={() => handleVarify(_id)} className="btn font-bold rounded-lg">
+              Verify
+            </button>
+          )}
         </td>
       </tr>
     </>

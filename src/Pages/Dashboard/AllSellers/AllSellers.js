@@ -38,6 +38,22 @@ const AllSellers = () => {
     }
   };
 
+  const handleVarify = (id) => {
+    fetch(`http://localhost:5000/seller/verify/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("verifid");
+          refetch();
+        }
+      });
+  };
+
   return (
     <div>
       <section className="w-11/12	mx-auto shadow-lg p-5 rounded-b">
@@ -56,7 +72,13 @@ const AllSellers = () => {
             </thead>
             <tbody>
               {allSellers.map((seller, i) => (
-                <AllSellersList key={seller._id} seller={seller} i={i} handleDelete={handleDelete}></AllSellersList>
+                <AllSellersList
+                  key={seller._id}
+                  seller={seller}
+                  i={i}
+                  handleDelete={handleDelete}
+                  handleVarify={handleVarify}
+                ></AllSellersList>
               ))}
             </tbody>
           </table>

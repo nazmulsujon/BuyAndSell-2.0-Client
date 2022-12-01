@@ -9,6 +9,7 @@ import FurnitureCategory from "../../Pages/FurnitureCategory/FurnitureCategory";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -54,7 +55,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/allSellers",
-        element: <AllSellers></AllSellers>,
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
       },
     ],
   },

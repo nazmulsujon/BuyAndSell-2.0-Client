@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
+import useAdmin from "../hooks/useAdmin";
 import Header from "../Pages/Shared/Header/Header";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
 
   return (
     <div className="w-full">
@@ -22,9 +24,11 @@ const DashboardLayout = () => {
               {/*  Sidebar content here  */}
               <Link to="/dashboard">My Orders</Link>
             </li>
-            <li>
-              <Link to="/dashboard/allSellers">All Sellers</Link>
-            </li>
+            {isAdmin && (
+              <li>
+                <Link to="/dashboard/allSellers">All Sellers</Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
