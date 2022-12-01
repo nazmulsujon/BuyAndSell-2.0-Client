@@ -22,7 +22,7 @@ const AllSellersList = ({ seller, i, handleDelete, handleVarify }) => {
           {isVerified ? (
             <button className="btn bg-green-500 hover:bg-green-600 font-bold rounded-lg">Verifid</button>
           ) : (
-            <button onClick={() => handleVarify(_id)} className="btn font-bold rounded-lg">
+            <button onClick={() => handleVarify(_id, name)} className="btn font-bold rounded-lg">
               Verify
             </button>
           )}

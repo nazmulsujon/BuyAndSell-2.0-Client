@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
-import AllSellersList from "./AllSellersList";
+import AllBuyersList from "./AllBuyersList";
 
-const AllSellers = () => {
-  const { data: allSellers = [], refetch } = useQuery({
+const AllBuyers = () => {
+  const { data: allBuyers = [], refetch } = useQuery({
     queryKey: ["allSellers"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users/allSellers`, {
+      const res = await fetch(`http://localhost:5000/users/allBuyers`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -17,11 +17,11 @@ const AllSellers = () => {
     },
   });
 
-  const handleDelete = (id, seller) => {
+  const handleDelete = (id, buyer) => {
     const procced = window.confirm("Are you sure to delete?");
     console.log(alert);
     if (procced) {
-      fetch(`http://localhost:5000/seller/${id}`, {
+      fetch(`http://localhost:5000/buyer/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -31,33 +31,16 @@ const AllSellers = () => {
         .then((data) => {
           //   console.log(data);
           if (data.deletedCount > 0) {
-            toast.success(`deleted seller ${seller} successfully`);
+            toast.success(`deleted seller ${buyer} successfully`);
             refetch();
           }
         });
     }
   };
-
-  const handleVarify = (id) => {
-    fetch(`http://localhost:5000/seller/verify/${id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          toast.success("verifid");
-          refetch();
-        }
-      });
-  };
-
   return (
     <div>
       <section className="w-11/12	mx-auto shadow-lg p-5 rounded-b">
-        <h2 className="uppercase text-2xl font-bold mt-1 mb-2">All Sellers</h2>
+        <h2 className="uppercase text-2xl font-bold mt-1 mb-2">All Buyers</h2>
         <hr />
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">
@@ -67,18 +50,11 @@ const AllSellers = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Delete</th>
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              {allSellers.map((seller, i) => (
-                <AllSellersList
-                  key={seller._id}
-                  seller={seller}
-                  i={i}
-                  handleDelete={handleDelete}
-                  handleVarify={handleVarify}
-                ></AllSellersList>
+              {allBuyers.map((buyer, i) => (
+                <AllBuyersList key={buyer._id} buyer={buyer} i={i} handleDelete={handleDelete}></AllBuyersList>
               ))}
             </tbody>
           </table>
@@ -88,4 +64,4 @@ const AllSellers = () => {
   );
 };
 
-export default AllSellers;
+export default AllBuyers;

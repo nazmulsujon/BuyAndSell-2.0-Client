@@ -24,11 +24,8 @@ const DashboardLayout = () => {
               {/*  Sidebar content here  */}
               <Link to="/dashboard">My Orders</Link>
             </li>
-            {isAdmin && (
-              <li>
-                <Link to="/dashboard/allSellers">All Sellers</Link>
-              </li>
-            )}
+            <li>{isAdmin && <Link to="/dashboard/allSellers">All Sellers</Link>}</li>
+            <li>{isAdmin && <Link to="/dashboard/allBuyers">All Buyers</Link>}</li>
           </ul>
         </div>
       </div>
