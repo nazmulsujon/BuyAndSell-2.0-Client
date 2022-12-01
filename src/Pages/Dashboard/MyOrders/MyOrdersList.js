@@ -2,6 +2,7 @@ import React from "react";
 
 const MyOrdersList = ({ myOrder, i }) => {
   const { product, image, price } = myOrder;
+
   return (
     <>
       <tr>

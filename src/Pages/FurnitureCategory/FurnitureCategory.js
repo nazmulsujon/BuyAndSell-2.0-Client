@@ -32,13 +32,14 @@ const FurnitureCategory = () => {
   return (
     <section>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 my-10">
-        {furnitureCategory.map((category) => (
-          <FurnitureCategoryCard
-            key={category._id}
-            category={category}
-            setFurniture={setFurniture}
-          ></FurnitureCategoryCard>
-        ))}
+        {furnitureCategory?.length &&
+          furnitureCategory.map((category) => (
+            <FurnitureCategoryCard
+              key={category._id}
+              category={category}
+              setFurniture={setFurniture}
+            ></FurnitureCategoryCard>
+          ))}
       </div>
       {furniture && <BookingModal furniture={furniture} setFurniture={setFurniture}></BookingModal>}
     </section>
