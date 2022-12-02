@@ -31,7 +31,7 @@ const AllBuyers = () => {
         .then((data) => {
           //   console.log(data);
           if (data.deletedCount > 0) {
-            toast.success(`deleted seller ${buyer} successfully`);
+            toast.success(`deleted buyer ${buyer} successfully`);
             refetch();
           }
         });

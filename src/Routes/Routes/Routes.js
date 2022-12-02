@@ -5,6 +5,7 @@ import About from "../../Pages/About/About";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import FurnitureCategory from "../../Pages/FurnitureCategory/FurnitureCategory";
 import Home from "../../Pages/Home/Home/Home";
@@ -67,6 +68,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reportedItems",
+        element: (
+          <AdminRoute>
+            <ReportedItems></ReportedItems>
           </AdminRoute>
         ),
       },

@@ -1,11 +1,10 @@
 import React from "react";
-import tickmark from "../../assets/tickmark.png";
 import { FaRegCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import useVerified from "../../hooks/useVerified";
-import toast from "react-hot-toast";
+import useVerified from "../../../hooks/useVerified";
+import tickmark from "../../../assets/tickmark.png";
 
-const FurnitureCategoryCard = ({ category, setFurniture }) => {
+const ReportedItemsCard = ({ reportedItem, handleDeleteItem }) => {
   const {
     _id,
     name,
@@ -18,26 +17,11 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
     use_time,
     published_date,
     seller,
-  } = category;
+  } = reportedItem;
 
   const { seller_name, seller_img, location, mobile, email } = seller;
   const [isVerified] = useVerified(email);
 
-  const handleGiveReport = (id) => {
-    fetch(`http://localhost:5000/furniture/report/${id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if ((data.modifiedCount || data.upsertedCount) > 0) {
-          toast.success(`report has given to ${name}`);
-        }
-      });
-  };
   return (
     <div className="card w-96 bg-neutral shadow mx-auto my-5">
       <figure>
@@ -87,22 +71,13 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
           Description: {description}
         </p>
       </div>
-      <div className="flex card-actions">
-        <div className="w-56 mx-auto mb-3 flex">
-          <label
-            onClick={() => setFurniture(category)}
-            htmlFor="booking-modal"
-            className={`btn btn-sm btn-info w-full rounded`}
-          >
-            Book Now
-          </label>
-        </div>
-        <button onClick={() => handleGiveReport(_id)} className="btn btn-sm btn-secondary rounded-lg mr-5 normal-case">
-          report
+      <div className="card-actions w-56 mx-auto">
+        <button onClick={() => handleDeleteItem(_id)} className="btn btn-sm btn-secondary rounded-xl  w-full mb-3">
+          Delete
         </button>
       </div>
     </div>
   );
 };
 
-export default FurnitureCategoryCard;
+export default ReportedItemsCard;
