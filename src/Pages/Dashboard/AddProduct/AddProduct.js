@@ -1,10 +1,12 @@
 import { format } from "date-fns";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 
 const AddProduct = () => {
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -15,9 +17,18 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   const handleAddProduct = (data, e) => {
+    let category_id = "";
+    if (data.categories === "HOME") {
+      category_id = "01";
+    } else if (data.categories === "OFFICE") {
+      category_id = "02";
+    } else if (data.categories === "RESTAURENT") {
+      category_id = "03";
+    }
+
     const product = {
       categories: data.categories,
-      category_id: data.category_id,
+      category_id,
       name: data.name,
       image: data.image,
       published_date: date,
@@ -28,6 +39,7 @@ const AddProduct = () => {
       company: data.company,
       seller: {
         seller_name: data.seller_name,
+        email: user?.email,
         seller_img: data.seller_img,
         location: data.location,
         mobile: data.mobile,
@@ -194,23 +206,7 @@ const AddProduct = () => {
               />
               {errors.company && <p className="text-red-500">{errors.company.message}</p>}
             </div>
-            <div className="form-control w-full max-w-sm">
-              <label className="label">
-                <span className="label-text">Category Id</span>
-              </label>
-              <select
-                type="text"
-                {...register("category_id", {
-                  required: "Category is Required",
-                })}
-                className="select select-bordered rounded w-full max-w-xs"
-              >
-                <option value="01">Categories HOME? 01</option>
-                <option value="02">Categories OFFICE? 02</option>
-                <option value="03">Categories RESTAURENT? 03</option>
-              </select>
-              {errors.category_id && <p className="text-red-500">{errors.category_id.message}</p>}
-            </div>
+            <div className="form-control w-full max-w-sm"></div>
           </div>
           <div className="flex w-10/12 mx-auto">
             <div className="form-control w-full max-w-sm mr-5">
