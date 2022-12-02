@@ -1,12 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
+import Spinner from "../../Shared/Spinner/Spinner";
 import MyOrdersList from "./MyOrdersList";
 
 const MyOrders = () => {
+  const { user } = useContext(AuthContext);
   const { data: myOrders = [] } = useQuery({
     queryKey: ["myOrders"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/myOrders`, {
+      const res = await fetch(`http://localhost:5000/myOrders/${user?.email}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -16,6 +19,14 @@ const MyOrders = () => {
     },
   });
   //   console.log(myOrders);
+
+  if (myOrders.lenght === 0) {
+    return (
+      <div className="text-center">
+        <Spinner></Spinner>
+      </div>
+    );
+  }
 
   return (
     <section className="w-11/12	mx-auto shadow-lg p-5 rounded-b">

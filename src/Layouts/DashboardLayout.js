@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthProvider/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
+import useSeller from "../hooks/useSeller";
 import Header from "../Pages/Shared/Header/Header";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
 
   return (
     <div className="w-full">
@@ -24,9 +26,26 @@ const DashboardLayout = () => {
               {/*  Sidebar content here  */}
               <Link to="/dashboard">My Orders</Link>
             </li>
-            <li>{isAdmin && <Link to="/dashboard/allSellers">All Sellers</Link>}</li>
-            <li>{isAdmin && <Link to="/dashboard/allBuyers">All Buyers</Link>}</li>
-            <li>{isAdmin && <Link to="/dashboard/reportedItems">Reported Items</Link>}</li>
+            {isAdmin && (
+              <li className="mb-2">
+                <Link to="/dashboard/allSellers">All Sellers</Link>
+              </li>
+            )}
+            {isAdmin && (
+              <li className="mb-2">
+                <Link to="/dashboard/allBuyers">All Buyers</Link>
+              </li>
+            )}
+            {isAdmin && (
+              <li className="mb-2">
+                <Link to="/dashboard/reportedItems">Reported Items</Link>
+              </li>
+            )}
+            {isSeller && (
+              <li className="mb-2">
+                <Link to="/dashboard/addProduct">Add Product</Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>

@@ -24,7 +24,7 @@ const SignUp = () => {
   } = useForm();
 
   const handleSignUp = (data, e) => {
-    console.log(data.name);
+    // console.log(data.name, data.role);
     e.target.reset();
     setSignUpError("");
     createUser(data.email, data.password)

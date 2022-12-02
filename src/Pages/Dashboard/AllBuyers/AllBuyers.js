@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
+import Spinner from "../../Shared/Spinner/Spinner";
 import AllBuyersList from "./AllBuyersList";
 
 const AllBuyers = () => {
@@ -37,6 +38,14 @@ const AllBuyers = () => {
         });
     }
   };
+
+  if (allBuyers.lenght === 0) {
+    return (
+      <div className="text-center">
+        <Spinner></Spinner>
+      </div>
+    );
+  }
   return (
     <div>
       <section className="w-11/12	mx-auto shadow-lg p-5 rounded-b">

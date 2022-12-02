@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
+import Spinner from "../../Shared/Spinner/Spinner";
 import AllSellersList from "./AllSellersList";
 
 const AllSellers = () => {
@@ -54,9 +55,17 @@ const AllSellers = () => {
       });
   };
 
+  if (allSellers.lenght === 0) {
+    return (
+      <div className="text-center">
+        <Spinner></Spinner>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <section className="w-11/12	mx-auto shadow-lg p-5 rounded-b">
+      <section className="w-11/12 mx-auto shadow-lg p-5 rounded-b">
         <h2 className="uppercase text-2xl font-bold mt-1 mb-2">All Sellers</h2>
         <hr />
         <div className="overflow-x-auto">

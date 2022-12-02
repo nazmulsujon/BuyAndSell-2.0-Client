@@ -8,7 +8,6 @@ const MyOrdersList = ({ myOrder, i }) => {
       <tr>
         <th>{i + 1}</th>
         <td>
-          {" "}
           <div className="avatar">
             <div className="mask mask-squircle w-20 h-20">
               <img src={image} alt="productImg" />

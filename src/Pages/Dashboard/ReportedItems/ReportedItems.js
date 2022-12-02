@@ -44,7 +44,7 @@ const ReportedItems = () => {
 
   if (reportedItems.length === 0) {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center h-[80vh]">
         <h2 className="text-4xl font-semibold ">No Items Found!</h2>
       </div>
     );
