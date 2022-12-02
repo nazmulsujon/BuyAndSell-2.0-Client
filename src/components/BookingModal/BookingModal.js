@@ -21,7 +21,7 @@ const BookingModal = ({ furniture, setFurniture }) => {
       phone,
     };
     console.log(order);
-    fetch(`http://localhost:5000/bookingOrders`, {
+    fetch(`https://assignment-12-resale-product-server.vercel.app/bookingOrders`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

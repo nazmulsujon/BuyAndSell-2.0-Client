@@ -26,7 +26,7 @@ const AddProduct = () => {
       category_id = "03";
     }
 
-    const product = {
+    const furniture = {
       categories: data.categories,
       category_id,
       name: data.name,
@@ -46,22 +46,22 @@ const AddProduct = () => {
       },
       description: data.description,
     };
-    console.log(product);
+    console.log(data.seller_img);
 
-    fetch("http://localhost:5000/category", {
+    fetch("https://assignment-12-resale-product-server.vercel.app/category", {
       method: "POST",
       headers: {
         "content-type": "application/json",
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
-      body: JSON.stringify(product),
+      body: JSON.stringify(furniture),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.acknowledged) {
-          toast.success(`${data.name} is added successfully`);
-          // navigate("/");
+          toast.success(` Added successfully`);
+          navigate("/dashboard/myProducts");
         }
       });
   };
@@ -262,6 +262,21 @@ const AddProduct = () => {
                 className="input input-bordered rounded w-full max-w-xs"
               />
               {errors.location && <p className="text-red-500">{errors.location.message}</p>}
+            </div>
+          </div>
+          <div className="flex w-10/12 mx-auto">
+            <div className="form-control w-full max-w-sm mr-5">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                {...register("email", {
+                  required: "Email is Required",
+                })}
+                className="input input-bordered rounded w-full max-w-xs"
+              />
+              {errors.email && <p className="text-red-500">{errors.email.message}</p>}
             </div>
           </div>
 

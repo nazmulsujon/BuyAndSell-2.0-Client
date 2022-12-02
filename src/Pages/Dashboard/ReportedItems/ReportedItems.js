@@ -10,7 +10,7 @@ const ReportedItems = () => {
   const { data: reportedItems = [], refetch } = useQuery({
     queryKey: ["reportedItems"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/furniture/reported/${id}`, {
+      const res = await fetch(`https://assignment-12-resale-product-server.vercel.app/furniture/reported/${id}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -25,7 +25,7 @@ const ReportedItems = () => {
     const procced = window.confirm("Are you sure to delete?");
     console.log(alert);
     if (procced) {
-      fetch(`http://localhost:5000/reportedFurniture/${id}`, {
+      fetch(`https://assignment-12-resale-product-server.vercel.app/reportedFurniture/${id}`, {
         method: "DELETE",
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,

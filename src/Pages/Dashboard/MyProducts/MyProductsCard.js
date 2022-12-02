@@ -1,11 +1,13 @@
 import React from "react";
-import tickmark from "../../assets/tickmark.png";
 import { FaRegCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import useVerified from "../../hooks/useVerified";
+import useVerified from "../../../hooks/useVerified";
+import tickmark from "../../../assets/tickmark.png";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const FurnitureCategoryCard = ({ category, setFurniture }) => {
+const MyProductsCard = ({ product, handleDeleteProduct }) => {
+  const navigate = useNavigate();
   const {
     _id,
     name,
@@ -18,26 +20,46 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
     use_time,
     published_date,
     seller,
-  } = category;
-
+  } = product;
   const { seller_name, seller_img, location, mobile, email } = seller;
   const [isVerified] = useVerified(email);
 
-  const handleGiveReport = (id) => {
-    fetch(`https://assignment-12-resale-product-server.vercel.app/furniture/report/${id}`, {
-      method: "PUT",
+  const handleAdvertiseFurniture = () => {
+    const advertiseFurniture = {
+      name,
+      image,
+      company,
+      condition,
+      original_price,
+      resale_price,
+      description,
+      use_time,
+      published_date,
+      seller_name,
+      seller_img,
+      location,
+      mobile,
+      email,
+    };
+    // console.log(advertiseFurniture);
+    fetch("https://assignment-12-resale-product-server.vercel.app/advertiseCategory", {
+      method: "POST",
       headers: {
+        "content-type": "application/json",
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
+      body: JSON.stringify(advertiseFurniture),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        if ((data.modifiedCount || data.upsertedCount) > 0) {
-          toast.success(`report has given to ${name}`);
+        // console.log(data);
+        if (data.acknowledged) {
+          toast.success(`Advertized successfully`);
+          navigate("/");
         }
       });
   };
+
   return (
     <div className="card w-96 bg-neutral shadow mx-auto my-5">
       <figure>
@@ -89,20 +111,19 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
       </div>
       <div className="flex card-actions">
         <div className="w-56 mx-auto mb-3 flex">
-          <label
-            onClick={() => setFurniture(category)}
-            htmlFor="booking-modal"
-            className={`btn btn-sm btn-info w-full rounded`}
-          >
-            Book Now
-          </label>
+          <button onClick={handleAdvertiseFurniture} className={`btn btn-sm btn-info w-full rounded`}>
+            Advertise
+          </button>
         </div>
-        <button onClick={() => handleGiveReport(_id)} className="btn btn-sm btn-secondary rounded-lg mr-5 normal-case">
-          report
+        <button
+          onClick={() => handleDeleteProduct(_id)}
+          className="btn btn-sm btn-secondary rounded-lg mr-5 normal-case"
+        >
+          delete
         </button>
       </div>
     </div>
   );
 };
 
-export default FurnitureCategoryCard;
+export default MyProductsCard;

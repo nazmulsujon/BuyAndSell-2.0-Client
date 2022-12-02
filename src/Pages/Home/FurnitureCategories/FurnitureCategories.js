@@ -10,7 +10,7 @@ const FurnitureCategories = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:5000/categories",
+      url: "https://assignment-12-resale-product-server.vercel.app/categories",
     }).then((res) => {
       setCategories(res.data);
     });

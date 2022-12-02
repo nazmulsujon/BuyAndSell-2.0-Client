@@ -11,6 +11,7 @@ const Header = () => {
     logOut()
       .then((res) => console.log("log out successfully"))
       .catch((err) => console.error(err));
+    localStorage.removeItem("accessToken");
   };
 
   const menuItems = (
@@ -21,8 +22,8 @@ const Header = () => {
         </NavLink>
       </li>
       <li className="mr-1 my-1 font-semibold">
-        <NavLink to={`/about`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
-          About
+        <NavLink to={`/blog`} className={({ isActive }) => (isActive ? " text-info rounded" : " rounded")}>
+          Blog
         </NavLink>
       </li>
       {user ? (

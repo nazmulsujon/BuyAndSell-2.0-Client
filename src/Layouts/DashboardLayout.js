@@ -21,7 +21,7 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side shadow-lg">
           <label htmlFor="dashboard-drawer" className="drawer-overlay "></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content ">
+          <ul className="menu p-4 w-80 bg-base-100 text-base-content font-bold">
             <li className="mb-2">
               {/*  Sidebar content here  */}
               <Link to="/dashboard">My Orders</Link>
@@ -44,6 +44,11 @@ const DashboardLayout = () => {
             {isSeller && (
               <li className="mb-2">
                 <Link to="/dashboard/addProduct">Add Product</Link>
+              </li>
+            )}
+            {isSeller && (
+              <li className="mb-2">
+                <Link to="/dashboard/myProducts">My Products</Link>
               </li>
             )}
           </ul>

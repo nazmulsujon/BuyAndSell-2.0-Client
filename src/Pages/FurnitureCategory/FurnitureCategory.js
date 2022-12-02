@@ -12,7 +12,7 @@ const FurnitureCategory = () => {
   const { data: furnitureCategory = [] } = useQuery({
     queryKey: ["furnitureCategory"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/category/${id}`, {
+      const res = await fetch(`https://assignment-12-resale-product-server.vercel.app/category/${id}`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },

@@ -1,13 +1,11 @@
 import React from "react";
-import tickmark from "../../assets/tickmark.png";
-import { FaRegCircle } from "react-icons/fa";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import useVerified from "../../hooks/useVerified";
-import toast from "react-hot-toast";
+import useVerified from "../../../hooks/useVerified";
+import tickmark from "../../../assets/tickmark.png";
+import { FaRegCircle } from "react-icons/fa";
 
-const FurnitureCategoryCard = ({ category, setFurniture }) => {
+const AdvertiseFurnitureCard = ({ furniture }) => {
   const {
-    _id,
     name,
     image,
     company,
@@ -17,27 +15,15 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
     description,
     use_time,
     published_date,
-    seller,
-  } = category;
+    seller_name,
+    seller_img,
+    location,
+    mobile,
+    email,
+  } = furniture;
 
-  const { seller_name, seller_img, location, mobile, email } = seller;
   const [isVerified] = useVerified(email);
 
-  const handleGiveReport = (id) => {
-    fetch(`https://assignment-12-resale-product-server.vercel.app/furniture/report/${id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if ((data.modifiedCount || data.upsertedCount) > 0) {
-          toast.success(`report has given to ${name}`);
-        }
-      });
-  };
   return (
     <div className="card w-96 bg-neutral shadow mx-auto my-5">
       <figure>
@@ -87,22 +73,8 @@ const FurnitureCategoryCard = ({ category, setFurniture }) => {
           Description: {description}
         </p>
       </div>
-      <div className="flex card-actions">
-        <div className="w-56 mx-auto mb-3 flex">
-          <label
-            onClick={() => setFurniture(category)}
-            htmlFor="booking-modal"
-            className={`btn btn-sm btn-info w-full rounded`}
-          >
-            Book Now
-          </label>
-        </div>
-        <button onClick={() => handleGiveReport(_id)} className="btn btn-sm btn-secondary rounded-lg mr-5 normal-case">
-          report
-        </button>
-      </div>
     </div>
   );
 };
 
-export default FurnitureCategoryCard;
+export default AdvertiseFurnitureCard;
