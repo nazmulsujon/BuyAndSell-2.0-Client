@@ -44,9 +44,8 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {myOrders.map((myOrder, i) => (
-              <MyOrdersList key={myOrder._id} myOrder={myOrder} i={i}></MyOrdersList>
-            ))}
+            {myOrders?.length &&
+              myOrders.map((myOrder, i) => <MyOrdersList key={myOrder._id} myOrder={myOrder} i={i}></MyOrdersList>)}
           </tbody>
         </table>
       </div>
