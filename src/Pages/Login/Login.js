@@ -48,12 +48,30 @@ const Login = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
-        console.log(user);
-        navigate(from, { replace: true });
+        // console.log(user);
+        saveUserToDb(user?.displayName, user?.email, "buyer");
       })
       .catch((err) => {
         console.error(err);
       });
+  };
+
+  const saveUserToDb = (name, email, role) => {
+    const user = { name, email, role };
+
+    fetch(`https://assignment-12-resale-product-server.vercel.app/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setLoginUserEmail(email);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

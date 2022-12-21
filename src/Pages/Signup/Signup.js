@@ -54,9 +54,8 @@ const SignUp = () => {
     googleSignIn()
       .then((res) => {
         const user = res.user;
-        // console.log(user);
+        console.log(user);
         saveUserToDb(user?.displayName, user?.email, "buyer");
-        navigate("/");
       })
       .catch((err) => {
         console.error(err);
