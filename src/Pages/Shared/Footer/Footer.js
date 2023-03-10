@@ -48,7 +48,7 @@ const Footer = () => {
           <Link className="link link-hover text-secondary">Policy</Link>
         </div>
       </footer>
-      <p className="text-accent text-center">All Right Reserved By @BUY&SELL || 2022</p>
+      <p className="text-accent text-center">All Right Reserved By @BUY&SELL || 2023</p>
     </div>
   );
 };

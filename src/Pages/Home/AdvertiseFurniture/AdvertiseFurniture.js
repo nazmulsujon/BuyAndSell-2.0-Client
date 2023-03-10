@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { Fade } from "react-reveal";
 import Spinner from "../../Shared/Spinner/Spinner";
 import AdvertiseFurnitureCard from "./AdvertiseFurnitureCard";
 
@@ -23,7 +24,9 @@ const AdvertiseFurniture = () => {
 
   return (
     <section>
-      <h2 className="uppercase text-2xl font-bold mt-10 mb-2 text-center">Advertised Items</h2>
+      <Fade left>
+        <h2 className="uppercase text-2xl font-bold mt-10 mb-2 text-center">Advertised Items</h2>
+      </Fade>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 my-5">
         {advertiseFurniture?.length &&
           advertiseFurniture.map((furniture) => (
